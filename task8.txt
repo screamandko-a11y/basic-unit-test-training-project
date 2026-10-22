@@ -1,0 +1,11 @@
+1. findByName(null)
+
+  This case is not tested. Without the null check, the method throws
+  the wrong exception. I would add a test to catch this bug.
+
+
+
+2. parseRow() with an invalid date
+
+The current test stops at an invalid age and never checks the date.
+I would use a valid age and an invalid date to test date error handling.

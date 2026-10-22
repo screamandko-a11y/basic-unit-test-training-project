@@ -50,6 +50,8 @@ class AnimalCsvParserTest {
         void shouldParseCompleteRow() {
 
             Optional<Animal> result = parser.parseRow("Buddy,Dog,3,true,2026-01-15");
+            assertTrue(result.isPresent());
+            assertEquals("Buddy", result.get().getName());
             assertEquals("Dog", result.get().getSpecies());
             assertEquals(3, result.get().getAge());
             assertTrue(result.get().isVaccinated());
@@ -63,7 +65,13 @@ class AnimalCsvParserTest {
         void shouldTrimWhitespace() {
 
             Optional<Animal> result = parser.parseRow("  Buddy , Dog , 3 , true , 2026-01-15 ");
+            assertTrue(result.isPresent());
             assertEquals("Buddy", result.get().getName());
+            assertEquals("Dog", result.get().getSpecies());
+            assertEquals(3, result.get().getAge());
+            assertTrue(result.get().isVaccinated());
+            assertEquals(LocalDate.of(2026, 1, 15),
+                    result.get().getIntakeDate());
 
         }
 
